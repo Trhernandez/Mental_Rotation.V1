@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mental Rotation Task</title>
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body></body>
+<script>
+
+  // Initialize jsPsych
+  var jsPsych = initJsPsych({
+    on_finish: function() {
+      jsPsych.data.displayData();
+    }
+  });
+
+  // Create timeline
+  var timeline = [];
+
+  // Preload images
+  var preload = {
+    type: jsPsychPreload,
+    images: [
+      'stimuli/46_150.jpg',
+      'stimuli/46_50.jpg',
+      // Add more images as needed
+    ]
+  };
+  timeline.push(preload);
+
+  // Fullscreen mode
+  var enter_fullscreen = {
+    type: jsPsychFullscreen,
+    fullscreen_mode: true
+  };
+  timeline.push(enter_fullscreen);
+
+  // Welcome message
+  var welcome = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "Welcome to the mental rotation task. Press any key to begin."
+  };
+  timeline.push(welcome);
+
+  // Participant ID entry
+  var participant_id_entry = {
+    type: jsPsychSurveyText,
+    questions: [
+      {prompt: "Please enter your participant ID:", name: 'participant_id'}
+    ]
+  };
+  timeline.push(participant_id_entry);
+
+  // Mental rotation trial
+  var mental_rotation_trial = {
+    type: jsPsychImageKeyboardResponse,
+    stimulus: 'images/rotation1.png', // Change this to dynamically load images
+    choices: ['f', 'j'], // 'f' for same, 'j' for different
+    prompt: "<p>Press 'f' if the images are the same, 'j' if they are different.</p>",
+    data: { trial_type: 'mental_rotation' },
+    on_finish: function(data) {
+      var correct_response = 'f'; // Define your correct response logic
+      if (data.response == correct_response) {
+        data.correct = true;
+      } else {
+        data.correct = false;
+      }
+    }
+  };
+  timeline.push(mental_rotation_trial);
+
+  // Feedback trial
+  var feedback = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+      if (last_trial_correct) {
+        return '<p style="border: 5px solid green;">Correct!</p>';
+      } else {
+        return '<p style="border: 5px solid red;">Incorrect.</p>';
+      }
+    },
+    data: { trial_type: 'feedback' }
+  };
+  timeline.push(feedback);
+
+  // Exit fullscreen mode
+  var exit_fullscreen = {
+    type: jsPsychFullscreen,
+    fullscreen_mode: false,
+    delay_after: 0
+  };
+  timeline.push(exit_fullscreen);
+
+  // Final message
+  var final_message = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p>Thank you for participating!</p><p>Press any key to finish.</p>"
+  };
+  timeline.push(final_message);
+
+  // Run the experiment
+  jsPsych.run(timeline);
+
+</script>
+</html>
