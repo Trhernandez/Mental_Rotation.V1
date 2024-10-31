@@ -100,7 +100,13 @@
   };
   timeline.push(preload);
 
-
+  // Fullscreen mode
+  var enter_fullscreen = {
+    type: jsPsychFullscreen,
+    fullscreen_mode: true
+  };
+  timeline.push(enter_fullscreen);
+  
   // Welcome message
   var welcome = {
     type: jsPsychHtmlKeyboardResponse,
@@ -240,9 +246,23 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     trials.push(break_trial)
   }
 }
-
 // run exp
 timeline.push(...trials);
+
+  // Exit fullscreen mode
+  var exit_fullscreen = {
+    type: jsPsychFullscreen,
+    fullscreen_mode: false,
+    delay_after: 0
+  };
+  timeline.push(exit_fullscreen);
+
+  // Final message
+  var final_message = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p>Thank you for participating in our experiment! We aimed to test how your reaction time changed as you compared objects of different angles. </p><p>Press any key to finish.</p>"
+  };
+  timeline.push(final_message);
 
 jsPsych.run(timeline);
 
