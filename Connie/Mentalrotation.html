@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
   <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
   <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -200,7 +201,7 @@ var shuffled_test_images = jsPsych.randomization.repeat(test_images, 1);
 var trials = [];
 
 // setting up counter to split length of exp based on image count 
-var halfwayPoint = Math.floor(test_images.length / 2)
+var halfwayPoint = Math.floor(test_images.length / 4)
 var counter = 0 
 
 for (let i = 0; i < shuffled_test_images.length; i++) {
@@ -241,7 +242,8 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     var break_trial = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "<p> Take a break! Exp continues in 1 minute . </p>",
-      trial_duration: 6000
+      trial_duration: 60000,
+      choices: ['space']
     };
     trials.push(break_trial)
   }
@@ -249,20 +251,20 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
 // run exp
 timeline.push(...trials);
 
-  // Exit fullscreen mode
-  var exit_fullscreen = {
+// Final message
+var final_message = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: "<p>Thank you for participating in our experiment! We aimed to test how your reaction time changed as you compared objects at different angles. </p><p>Press any key to continue.</p>"
+};
+timeline.push(final_message);
+
+    // Exit fullscreen mode
+    var exit_fullscreen = {
     type: jsPsychFullscreen,
     fullscreen_mode: false,
     delay_after: 0
   };
   timeline.push(exit_fullscreen);
-
-  // Final message
-  var final_message = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Thank you for participating in our experiment! We aimed to test how your reaction time changed as you compared objects of different angles. </p><p>Press any key to finish.</p>"
-  };
-  timeline.push(final_message);
 
 jsPsych.run(timeline);
 
