@@ -18,6 +18,7 @@
 
   // Initialize jsPsych
   var jsPsych = initJsPsych({
+    show_progress_bar: true,
     on_finish: function() {
       jsPsych.data.displayData();
     }
@@ -214,8 +215,7 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     type: jsPsychImageKeyboardResponse,
     stimulus: shuffled_test_images[i],
     choices: ['f', 'j'],
-    prompt: "<p>Press 'f' if the images are the same, 'j' if they are different.</p>" + 
-    "<p>Remaining images: " + remainingTrials + "</p>",
+    prompt: "<p>Press 'f' if the images are the same, 'j' if they are different.</p>", 
     data: { task: "response", correct_response: correct_response },
     on_finish: function(data) {
       data.correct = (data.response == data.correct_response);
