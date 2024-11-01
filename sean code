@@ -1,0 +1,10 @@
+var buffer_trial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '', // Blank screen for the break
+    choices: "NO_KEYS", // No key responses during the buffer period
+    trial_duration: 1000, // 1-second delay, adjust as needed
+    data: { trial_type: 'buffer' }
+};
+ 
+var mental_rotation_procedure = {
+    timeline: [mental_rotation_trial, buffer_trial],     timeline_variables: stimuli 
