@@ -16,7 +16,7 @@
 <body></body>
 <script>
 
-  // Initialize jsPsych
+  // Initialize jsPsych + show progress bar up to
   var jsPsych = initJsPsych({
     show_progress_bar: true,
     on_finish: function() {
@@ -98,6 +98,16 @@
 'stimuli/40_150_R.jpg', 'stimuli/40_150.jpg', 'stimuli/41_0_R.jpg', 'stimuli/41_0.jpg', 'stimuli/41_50_R.jpg', 
 'stimuli/41_50.jpg', 'stimuli/41_100_R.jpg', 'stimuli/41_100.jpg', 'stimuli/41_150_R.jpg', 'stimuli/41_150.jpg', 
 'stimuli/42_0_R.jpg', 'stimuli/42_0.jpg', 'stimuli/42_50_R.jpg', 'stimuli/42_50.jpg', 'stimuli/42_100_R.jpg',
+'stimuli/42_100.jpg', 'stimuli/42_150_R.jpg', 'stimuli/42_150.jpg', 'stimuli/43_0_R.jpg', 'stimuli/43_0.jpg', 
+'stimuli/43_50_R.jpg', 'stimuli/43_50.jpg', 'stimuli/43_100_R.jpg','stimuli/43_100.jpg', 'stimuli/43_150_R.jpg', 
+'stimuli/43_150.jpg', 'stimuli/44_0_R.jpg', 'stimuli/44_0.jpg', 'stimuli/44_50_R.jpg', 'stimuli/44_50.jpg', 
+'stimuli/44_100_R.jpg','stimuli/44_100.jpg', 'stimuli/44_150_R.jpg', 'stimuli/44_150.jpg', 'stimuli/45_0_R.jpg', 
+'stimuli/45_0.jpg', 'stimuli/45_50_R.jpg', 'stimuli/45_50.jpg', 'stimuli/45_100_R.jpg','stimuli/45_100.jpg', 
+'stimuli/45_150_R.jpg', 'stimuli/45_150.jpg', 'stimuli/46_0_R.jpg', 'stimuli/46_0.jpg', 'stimuli/46_50_R.jpg', 
+'stimuli/46_50.jpg', 'stimuli/46_100_R.jpg','stimuli/46_100.jpg', 'stimuli/46_150_R.jpg', 'stimuli/46_150.jpg', 
+'stimuli/47_0_R.jpg', 'stimuli/47_0.jpg', 'stimuli/47_50_R.jpg', 'stimuli/47_50.jpg', 'stimuli/47_100_R.jpg',
+'stimuli/47_100.jpg', 'stimuli/47_150_R.jpg', 'stimuli/47_150.jpg', 'stimuli/48_0_R.jpg', 'stimuli/48_0.jpg', 
+'stimuli/48_50_R.jpg', 'stimuli/48_50.jpg', 'stimuli/48_100_R.jpg','stimuli/48_100.jpg', 'stimuli/48_150_R.jpg', 'stimuli/48_150.jpg'
     ]
   };
   timeline.push(preload);
@@ -112,7 +122,7 @@
   // Welcome message
   var welcome = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Welcome to the mental rotation task. Press any key to begin."
+    stimulus: "Welcome to the experiment. Press any key to begin."
   };
   timeline.push(welcome);
 
@@ -194,6 +204,16 @@
 'stimuli/40_150_R.jpg', 'stimuli/40_150.jpg', 'stimuli/41_0_R.jpg', 'stimuli/41_0.jpg', 'stimuli/41_50_R.jpg', 
 'stimuli/41_50.jpg', 'stimuli/41_100_R.jpg', 'stimuli/41_100.jpg', 'stimuli/41_150_R.jpg', 'stimuli/41_150.jpg', 
 'stimuli/42_0_R.jpg', 'stimuli/42_0.jpg', 'stimuli/42_50_R.jpg', 'stimuli/42_50.jpg', 'stimuli/42_100_R.jpg',
+'stimuli/42_100.jpg', 'stimuli/42_150_R.jpg', 'stimuli/42_150.jpg', 'stimuli/43_0_R.jpg', 'stimuli/43_0.jpg', 
+'stimuli/43_50_R.jpg', 'stimuli/43_50.jpg', 'stimuli/43_100_R.jpg','stimuli/43_100.jpg', 'stimuli/43_150_R.jpg', 
+'stimuli/43_150.jpg', 'stimuli/44_0_R.jpg', 'stimuli/44_0.jpg', 'stimuli/44_50_R.jpg', 'stimuli/44_50.jpg', 
+'stimuli/44_100_R.jpg','stimuli/44_100.jpg', 'stimuli/44_150_R.jpg', 'stimuli/44_150.jpg', 'stimuli/45_0_R.jpg', 
+'stimuli/45_0.jpg', 'stimuli/45_50_R.jpg', 'stimuli/45_50.jpg', 'stimuli/45_100_R.jpg','stimuli/45_100.jpg', 
+'stimuli/45_150_R.jpg', 'stimuli/45_150.jpg', 'stimuli/46_0_R.jpg', 'stimuli/46_0.jpg', 'stimuli/46_50_R.jpg', 
+'stimuli/46_50.jpg', 'stimuli/46_100_R.jpg','stimuli/46_100.jpg', 'stimuli/46_150_R.jpg', 'stimuli/46_150.jpg', 
+'stimuli/47_0_R.jpg', 'stimuli/47_0.jpg', 'stimuli/47_50_R.jpg', 'stimuli/47_50.jpg', 'stimuli/47_100_R.jpg',
+'stimuli/47_100.jpg', 'stimuli/47_150_R.jpg', 'stimuli/47_150.jpg', 'stimuli/48_0_R.jpg', 'stimuli/48_0.jpg', 
+'stimuli/48_50_R.jpg', 'stimuli/48_50.jpg', 'stimuli/48_100_R.jpg','stimuli/48_100.jpg', 'stimuli/48_150_R.jpg', 'stimuli/48_150.jpg'
    ];
 // Shuffle the test images
 var shuffled_test_images = jsPsych.randomization.repeat(test_images, 1);
@@ -208,6 +228,8 @@ var counter = 0
 for (let i = 0; i < shuffled_test_images.length; i++) {
   // determining correct response for each image based on "R" or not 
   let correct_response = shuffled_test_images[i].includes("_R") ? 'j' : 'f';
+  
+  //line below only relevant if we have a trial counter to display
   let remainingTrials = shuffled_test_images.length - i;
   
   // mental rotation trial
@@ -215,7 +237,8 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     type: jsPsychImageKeyboardResponse,
     stimulus: shuffled_test_images[i],
     choices: ['f', 'j'],
-    prompt: "<p>Press 'f' if the images are the same, 'j' if they are different.</p>", 
+    prompt: "<p>Press 'f' if the images are the same, 'j' if they are different.</p>" +
+    "<p>Remaining images: " + remainingTrials + "</p>",
     data: { task: "response", correct_response: correct_response },
     on_finish: function(data) {
       data.correct = (data.response == data.correct_response);
@@ -223,7 +246,7 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     }
   };
 
-  // feedback var
+  // color coded borders around response 
   var feedback = {
     type: jsPsychHtmlKeyboardResponse,
     trial_duration: 500,
