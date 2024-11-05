@@ -20,6 +20,7 @@
   var jsPsych = initJsPsych({
     show_progress_bar: true,
     on_finish: function() {
+      jsPsych.data.get().localSave('csv', 'results.csv'); //save data at the end as a csv file
       jsPsych.data.displayData();
     }
   });
@@ -274,7 +275,10 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     trials.push(break_trial)
   }
 }
-// run exp
+
+// get csv representation of data and log to console
+console.log(jsPsych.data.get().csv());
+  // run exp
 timeline.push(...trials);
 
 // Final message
