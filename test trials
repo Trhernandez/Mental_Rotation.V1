@@ -1,0 +1,17 @@
+// Announcement for test trials
+var test_trial_announcement = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: "<p>You will now complete a few test trials to get familiar with the task.</p><p>Press any key to begin the test trials.</p>"
+};
+timeline.push(test_trial_announcement);
+
+// Test trials
+var test_trials = test_images.slice(0, 3).map(function(image) {
+  return {
+    type: jsPsychImageKeyboardResponse,
+    stimulus: image,
+    choices: ['f', 'j'], // Modify as per your response keys for "same" or "different"
+    prompt: "<p>Press 'f' if the image is the same, 'j' if different.</p>"
+  };
+});
+timeline.push(...test_trials);
