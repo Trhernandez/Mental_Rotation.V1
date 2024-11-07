@@ -18,6 +18,8 @@
   // Initialize jsPsych
   var jsPsych = initJsPsych({
     on_finish: function() {
+      //downloating results as a csv at the end of the experiment
+      jsPsych.data.get().localSave('csv', 'results.csv');
       jsPsych.data.displayData();
     }
   });
