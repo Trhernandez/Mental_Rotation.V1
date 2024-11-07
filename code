@@ -102,6 +102,18 @@
   };
   timeline.push(exit_fullscreen);
 
+  
+  var googleFormLink = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+          <p>As a final step in our experiment, we would like you to complete a demographic survey.</p>
+          <p>Please <a href="https://docs.google.com/forms/d/e/1FAIpQLSec8IGBAVDe5WduxVzP3pMMg8RcLuz3fMLbmxEEaj-EUViblg/viewform">click here to open the survey</a> in a new tab.</p>
+          <p>After completing the survey, return to this tab and press any key to continue.</p>
+      `,
+  };
+
+  timeline.push(googleFormLink);
+  
   // Final message
   var final_message = {
     type: jsPsychHtmlKeyboardResponse,
