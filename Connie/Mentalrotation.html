@@ -268,8 +268,8 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
   if(++counter === halfwayPoint) {
     var break_trial = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "<p> Take a break! Exp continues in 1 minute . </p>",
-      trial_duration: 60000,
+      stimulus: "<p> Take a break! Exp continues in 30 seconds . </p>",
+      trial_duration: 30000,
       choices: ['space']
     };
     trials.push(break_trial)
@@ -281,12 +281,24 @@ console.log(jsPsych.data.get().csv());
   // run exp
 timeline.push(...trials);
 
-// Final message
-var final_message = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: "<p>Thank you for participating in our experiment! We aimed to test how your reaction time changed as you compared objects at different angles. </p><p>Press any key to continue.</p>"
-};
-timeline.push(final_message);
+var googleFormLink = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+          <p>As a final step in our experiment, we would like you to complete a demographic survey.</p>
+          <p>Please <a href="https://docs.google.com/forms/d/e/1FAIpQLSec8IGBAVDe5WduxVzP3pMMg8RcLuz3fMLbmxEEaj-EUViblg/viewform">click here to open the survey</a> in a new tab.</p>
+          <p>After completing the survey, return to this tab and press any key to continue.</p>
+      `,
+  };
+
+  timeline.push(googleFormLink);
+  
+  // Final message
+  var final_message = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p>Thank you for participating!</p><p>Press any key to finish.</p>"
+  };
+  timeline.push(final_message);
+
 
     // Exit fullscreen mode
     var exit_fullscreen = {
