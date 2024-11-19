@@ -262,7 +262,15 @@ for (let i = 0; i < shuffled_test_images.length; i++) {
     }
   };
 
-  trials.push(mental_rotation_trial, feedback);
+  // fixation cross between each trial
+  var fixation = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: '<div style="font-size: 75px;">+</div>',
+    choices: "NO_KEYS",
+    trial_duration: 1000
+  };
+
+  trials.push(fixation, mental_rotation_trial, feedback);  
 
   // checking halfway status 
   if(++counter === halfwayPoint) {
