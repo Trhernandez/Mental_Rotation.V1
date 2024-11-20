@@ -24,7 +24,7 @@
   type: jsPsychSurveyHtmlForm,
   preamble: '<b>Vividness of Visual Imagery Questionnaire (VVIQ) (16 questions) </b>',
   html: `
-    <div style="text-align: left; padding-left: 5px;">
+    <div style="width: 600px; margin: 0 auto;">
     <p><b>Think of some relative or friend whom you frequently see (but who is not with you at present) and consider carefully the picture that comes before your mind’s eye.</b></p>
     <label>The exact contours of face, head, shoulders, and body: 
       <select name="response_1" required>
@@ -217,6 +217,92 @@
   `
 };
   timeline.push(VVIQ);
+
+  var demographicSurvey = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: '<p>Please complete this demographic questionnaire:</p>',
+    html: `
+        <div style="width: 600px; margin: 0 auto;">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select...</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="other">Other</option>
+                    <option value="prefer-not">Prefer not to say</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="education">Highest Level of Education:</label>
+                <select id="education" name="education" required>
+                    <option value="">Select...</option>
+                    <option value="high-school">High School</option>
+                    <option value="some-college">Some College</option>
+                    <option value="bachelors">Bachelor's Degree</option>
+                    <option value="masters">Master's Degree</option>
+                    <option value="doctorate">Doctorate</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="handedness">Handedness:</label>
+                <select id="handedness" name="handedness" required>
+                    <option value="">Select...</option>
+                    <option value="right">Right-handed</option>
+                    <option value="left">Left-handed</option>
+                    <option value="ambidextrous">Ambidextrous</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vision">Vision:</label>
+                <select id="vision" name="vision" required>
+                    <option value="">Select...</option>
+                    <option value="normal">Normal</option>
+                    <option value="corrected">Corrected to normal</option>
+                    <option value="impaired">Visually impaired</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+                <label for="technical_difficulties">Did you experience any technical difficulties during the experiment? If yes, please describe:</label>
+                <textarea id="technical_difficulties" name="technical_difficulties" rows="4" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            </div>
+        </div>
+    `,
+    button_label: 'Continue',
+    css_classes: ['survey-form'],
+    on_load: function() {
+        // Add custom CSS for form styling
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .survey-form .form-group {
+                    margin: 20px 0;
+                }
+                .survey-form label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+                .survey-form input,
+                .survey-form select {
+                    width: 100%;
+                    padding: 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+            </style>
+        `);
+    }
+};
+
+// Add the survey to the timeline instead of the Google Form link
+timeline.push(demographicSurvey);
 
   // Initialize the jsPsych experiment
   const jsPsych = initJsPsych({
