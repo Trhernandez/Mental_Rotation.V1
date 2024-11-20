@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mental Rotation Task</title>
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
+</head>
+
+<body></body>
+<script>
+  // Create timeline
+  var timeline = [];
+
+  /* Adding survey for data collection */
+  var VVIQ = {
+  type: jsPsychSurveyHtmlForm,
+  preamble: '<b>Vividness of Visual Imagery Questionnaire (VVIQ) (16 questions) </b>',
+  html: `
+    <div style="text-align: left; padding-left: 5px;">
+    <p><b>Think of some relative or friend whom you frequently see (but who is not with you at present) and consider carefully the picture that comes before your mind’s eye.</b></p>
+    <label>The exact contours of face, head, shoulders, and body: 
+      <select name="response_1" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>Characteristic poses of head, attitudes of body, etc.
+      <select name="response_2" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>The precise carriage, length of step, etc. in walking.
+      <select name="response_3" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>The different colors worn in some familiar clothes.
+      <select name="response_4" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+
+  
+    <p><b>Visualize a rising sun. Consider carefully the picture that comes before your mind’s eye.</b></p>
+    <label>The sun is rising above the horizon into a hazy sky.
+      <select name="response_5" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>The sky clears and surrounds the sun with blueness.
+      <select name="response_6" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>Clouds. A storm blows up, with flashes of lightening.
+      <select name="response_7" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>A rainbow appears.
+      <select name="response_8" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+
+
+  <p><b>Think of the front of a shop which you often go to. Consider the picture that comes before your mind’s eye.</b></p>
+      <label>The overall appearance of the shop from the opposite side of the road.
+        <select name="response_9" required>
+          <option value="" disabled selected>Select your option</option>
+          <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+          <option value="Dim and vague; flat">Dim and vague; flat</option>
+          <option value="Moderately clear and lively">Moderately clear and lively</option>
+          <option value="Clear and lively">Clear and lively</option>
+          <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+        </select>
+      </label>
+      <br><br>
+    <label>A window display including colors, shape, and details of individual items for sale.
+      <select name="response_10" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>You are near the entrance. The color, shape, and details of the door.
+      <select name="response_11" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>You enter the shop and go to the counter. The counter assistant serves you. Money changes hands.
+      <select name="response_12" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+
+
+  <p><b>Finally, think of a country scene which involves trees, mountains, and a lake. Consider the picture that comes before your mind’s eye.</b></p>
+      <label>The contours of the landscape.
+        <select name="response_13" required>
+          <option value="" disabled selected>Select your option</option>
+          <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+          <option value="Dim and vague; flat">Dim and vague; flat</option>
+          <option value="Moderately clear and lively">Moderately clear and lively</option>
+          <option value="Clear and lively">Clear and lively</option>
+          <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+        </select>
+      </label>
+      <br><br>
+    <label>The color and shape of the trees.
+      <select name="response_14" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>The color and shape of the lake.
+      <select name="response_15" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>
+    <label>A strong wind blows on the tree and on the lake causing waves.
+      <select name="response_16" required>
+        <option value="" disabled selected>Select your option</option>
+        <option value="No image at all, you only “know” that you are thinking of the object">No image at all, you only “know”</option>
+        <option value="Dim and vague; flat">Dim and vague; flat</option>
+        <option value="Moderately clear and lively">Moderately clear and lively</option>
+        <option value="Clear and lively">Clear and lively</option>
+        <option value="Perfectly clear and lively as real seeing">Perfectly clear and lively as real seeing</option>
+      </select>
+    </label>
+    <br><br>   
+
+  
+  </div>
+  `
+};
+  timeline.push(VVIQ);
+
+  // Initialize the jsPsych experiment
+  const jsPsych = initJsPsych({
+    on_finish: function () {
+      console.log("Experiment complete!");
+    }
+  });
+
+  jsPsych.run(timeline);
+</script>
+
+</html>
+
